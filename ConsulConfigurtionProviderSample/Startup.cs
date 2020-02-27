@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Winton.Extensions.Configuration.Consul;
 using static System.Text.Encoding;
 
 // credit: https://www.c-sharpcorner.com/article/dynamic-asp-net-core-configurations-with-consul-kv/
@@ -21,9 +22,29 @@ namespace ConsulConfigurtionProviderSample
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IHostEnvironment env, IConfiguration configuration)
         {
             Configuration = configuration;
+
+            //string consoleUrl = configuration["Consul:Host"];
+
+            //var builder = new ConfigurationBuilder()
+            //.SetBasePath(env.ContentRootPath)
+            //.AddConsul(
+            //            $"{env.ApplicationName}/{env.EnvironmentName}/appsettings.json",
+            //            (IConsulConfigurationSource options) =>
+            //            {
+            //                options.ConsulConfigurationOptions =
+            //                    cco =>
+            //                    {
+            //                        cco.Address = new Uri(consoleUrl);
+            //                    };
+            //                options.Optional = true;
+            //                options.PollWaitTime = TimeSpan.FromSeconds(5);
+            //                options.ReloadOnChange = true;
+            //                options.OnLoadException = exceptionContext => { exceptionContext.Ignore = true; };
+            //            });
+            //Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -32,24 +53,9 @@ namespace ConsulConfigurtionProviderSample
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOptions();
-            services.AddConsul(Configuration);
+            services.AddConsulInjection(Configuration); // custom implementation which AddSingleton<IConsulClient>
             services.Configure<DemoAppSettings>(Configuration.GetSection("DemoAppSettings"));
-            //services.Configure<AConfig>(Configuration);
-            //services.Configure<AConfig>(async config => {
-            //    using (var client = new ConsulClient(clientConfig => 
-            //                    clientConfig.Address = new Uri("http://localhost:4000/")))
-            //    {
-            //        var getPair = await client.KV.Get("serviceUrl");
-            //        if (getPair.Response != null)
-            //        {
-            //            var serviceUrl = UTF8.GetString(
-            //                            getPair.Response.Value, 
-            //                            0, 
-            //                            getPair.Response.Value.Length);
-            //            config.ServiceUrl = serviceUrl;
-            //        }
-            //    }
-            //});
+
             services.AddControllers();
         }
 

@@ -11,7 +11,7 @@ namespace ConsulConfigurtionProviderSample
 {
     public static class ConsulExtensions
     {
-        public static IServiceCollection AddConsul(
+        public static IServiceCollection AddConsulInjection(
             this IServiceCollection services, 
             IConfiguration configuration)
         {
