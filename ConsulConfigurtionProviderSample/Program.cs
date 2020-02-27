@@ -46,7 +46,7 @@ namespace ConsulConfigurtionProviderSample
                                         options.Optional = true;
                                         options.PollWaitTime = TimeSpan.FromSeconds(5);
                                         options.ReloadOnChange = true;
-                                        options.OnLoadException = exceptionContext => { exceptionContext.Ignore = true; };
+                                        // options.OnLoadException = exceptionContext => { exceptionContext.Ignore = true; };
                                     })
                         .AddEnvironmentVariables();
                      })
