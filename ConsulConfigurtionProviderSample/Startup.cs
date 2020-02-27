@@ -33,6 +33,7 @@ namespace ConsulConfigurtionProviderSample
         {
             services.AddOptions();
             services.AddConsul(Configuration);
+            services.Configure<DemoAppSettings>(Configuration.GetSection("DemoAppSettings"));
             //services.Configure<AConfig>(Configuration);
             //services.Configure<AConfig>(async config => {
             //    using (var client = new ConsulClient(clientConfig => 

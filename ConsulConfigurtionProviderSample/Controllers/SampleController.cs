@@ -14,16 +14,13 @@ namespace ConsulConfigurtionProviderSample.Controllers
     {
         private readonly ILogger<SampleController> _logger;
         private readonly IConsulClient _consulClient;
-        //private readonly AConfig _config;
 
         public SampleController(
             ILogger<SampleController> logger,
             IConsulClient consulClient)
-            //AConfig config)
         {
             _logger = logger;
             _consulClient = consulClient;
-            //_config = config;
         }
 
         [HttpGet]

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Consul" Version="0.7.2.6" />
+    <PackageReference Include="Winton.Extensions.Configuration.Consul" Version="3.0.2" />
   </ItemGroup>
 
 

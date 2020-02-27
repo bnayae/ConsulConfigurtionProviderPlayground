@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ConsulConfigurtionProviderSample
 {
-    public class AConfig
+    public class DemoAppSettings
     {
         public string Color { get; set; }
         public int Size { get; set; }
