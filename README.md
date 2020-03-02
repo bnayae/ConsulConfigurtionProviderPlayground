@@ -40,3 +40,7 @@ navigate to: http://localhost:8500
 ```
 kubectl port-forward -n hashicorp svc/bitnami-consul-ui 8500:80
 ```
+
+## Consul 
+The following Consul configuration should work for the sample:  
+![](consul-sample.jpg)
