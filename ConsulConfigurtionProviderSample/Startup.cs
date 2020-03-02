@@ -55,7 +55,7 @@ namespace ConsulConfigurtionProviderSample
             services.AddOptions();
             services.AddConsulInjection(Configuration); // custom implementation which AddSingleton<IConsulClient>
             services.Configure<DemoAppSettings>(Configuration);
-            services.Configure<DemoAppSettings>(Configuration.GetSection("DemoAppSettings"));
+            services.Configure<DemoAppSettings>(Configuration.GetSection(nameof(DemoAppSettings)));
 
             services.AddControllers();
         }
