@@ -35,7 +35,8 @@ namespace ConsulConfigurtionProviderSample
                          var env = host.HostingEnvironment;
                          builder.SetBasePath(env.ContentRootPath)
                         .AddConsul(
-                                    $"{env.ApplicationName}/{env.EnvironmentName}/appsettings.json",
+                                    $"{env.ApplicationName}/{env.EnvironmentName}",
+                                    //$"{env.ApplicationName}/{env.EnvironmentName}/appsettings.json",
                                     (IConsulConfigurationSource options) =>
                                     {
                                         options.ConsulConfigurationOptions =

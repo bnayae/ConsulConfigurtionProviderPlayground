@@ -12,25 +12,36 @@ namespace ConsulConfigurtionProviderSample.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class DemoController : ControllerBase
+    public class CompController : ControllerBase
     {
         private readonly ILogger<SampleController> _logger;
+        private readonly IConfiguration _configuration;
+        private readonly IOptions<DemoAppSettings> _options;
         private readonly IOptionsSnapshot<DemoAppSettings> _optionsSnapshot;
 
-        public DemoController(
+        public CompController(
             ILogger<SampleController> logger,
+            IConfiguration configuration,
+            IOptions<DemoAppSettings> options,
             IOptionsSnapshot<DemoAppSettings> optionsSnapshot)
         {
             _logger = logger;
+            _configuration = configuration;
+            _options = options;
             _optionsSnapshot = optionsSnapshot;
         }
 
         // GET api/values  
         [HttpGet]
-        public async Task<string> GetAsync()
+        public async Task<IEnumerable<string>> GetAsync()
         {
             await Task.Delay(400);
-            return $"IOptionsSnapshot: {_optionsSnapshot.Value.Color}" ;
+            return new string[]
+                    {
+                        $"IConfiguration:   {_configuration["DemoAppSettings:Color"]}",
+                        $"IOptions:         {_options.Value.Color}",
+                        $"IOptionsSnapshot: {_optionsSnapshot.Value.Color}"
+                    };
         }
     }
 }
